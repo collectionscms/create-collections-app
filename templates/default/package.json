@@ -6,13 +6,12 @@
   "scripts": {
     "dev": "superfast dev",
     "build": "superfast build",
-    "start": "node superfast/build/main.js",
-    "db:init": "superfast db migration:generate -n initial && superfast db migration:run"
+    "start": "node superfast/build/main.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "superfast-cms": "^0.1.2",
+    "superfastcms": "^0.1.0",
     "yup": "^0.32.9",
     "typeorm": "^0.2.37",
     "react-router": "^5.2.1",

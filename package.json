@@ -1,6 +1,6 @@
 {
   "name": "create-superfast-app",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "Create Superfast apps in one command",
   "main": "index.js",
   "bin": {
