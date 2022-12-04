@@ -3,7 +3,7 @@
 import { Argument, Command, Option } from 'commander';
 import packageJson from './package.json';
 import chalk from 'chalk';
-import { copyRemoteTemplate, copyToProject, initDatabase, installProject } from './helpers/utils';
+import { copyRemoteTemplate, copyToProject, installProject } from './helpers/utils';
 import Output from "./helpers/output";
 
 const program = new Command();
@@ -44,7 +44,6 @@ program.parse(process.argv);
   }
 
   await installProject(projectDirectory);
-  await initDatabase(projectDirectory);
   Output.nextSteps(projectDirectory);
 })();
 
