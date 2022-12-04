@@ -100,18 +100,3 @@ export const installProject = async (projectName: string) => {
     process.exit(1);
   }
 };
-
-export const initDatabase = async (projectName: string) => {
-  try {
-    const projectDir = path.join(process.cwd(), projectName);
-    const spinner = ora(chalk.blue('Creating database...'));
-    spinner.start();
-    await execa('npm', ['run', 'db:init'], {cwd: projectDir});
-    spinner.stop();
-    Output.success('Successfully created database');
-  } catch (e) {
-    console.log(e);
-    Output.error(e.message);
-    process.exit(1);
-  }
-};

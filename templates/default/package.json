@@ -11,7 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "superfastcms": "^0.1.0",
+    "superfastcms": "^0.1.1",
     "yup": "^0.32.9",
     "typeorm": "^0.2.37",
     "react-router": "^5.2.1",
