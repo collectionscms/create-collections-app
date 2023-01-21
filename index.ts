@@ -16,18 +16,6 @@ program.addArgument(
   new Argument('<project-directory>', 'specify path for create-superfast-app').argOptional().default('create-superfast-app')
 );
 
-// Options
-program.addOption(
-  new Option('-d, --docker <type>', 'default docker file to be included with the set-up')
-    .default('mariadb')
-    .choices(['mariadb', 'postgres', 'mysql'])
-);
-
-program.addOption(
-  new Option('-t, --template <template>', 'use one of superfast starter templates ex. "next-blog"')
-    .default(null)
-)
-
 program.parse(process.argv);
 
 (async () => {
