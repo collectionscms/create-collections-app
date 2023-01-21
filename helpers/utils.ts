@@ -1,23 +1,18 @@
-import fs from 'fs-extra';
-import path from 'path';
 import chalk from 'chalk';
 import execa from 'execa';
-import ora from 'ora';
+import fs from 'fs-extra';
+import path from 'path';
 import Output from './output';
-import axios from 'axios';
-import AdmZip from 'adm-zip';
 
-export const copyToProject = async (projectName: string, dockerConfig = 'mariadb') => {
+export const copyToProject = async (projectName: string) => {
   try {
     Output.info(`Copying files to ${chalk.magentaBright(projectName)} directory...`);
 
     const projectDir = path.join(process.cwd(), projectName);
     const templateDir = path.join(__dirname, '../', 'templates', 'default');
-    const dockerDir = path.join(__dirname, '../', 'docker-configs', dockerConfig);
 
     const requirementsExist = await Promise.all([
       fs.pathExists(templateDir),
-      fs.pathExists(dockerDir)
     ]);
 
     if (!requirementsExist.every((requirement) => requirement === true)) {
@@ -36,13 +31,7 @@ export const copyToProject = async (projectName: string, dockerConfig = 'mariadb
 
     await Promise.all([
       fs.copy(templateDir, projectDir),
-      fs.copy(dockerDir, projectDir)
     ]);
-
-    await fs.move(
-      path.join(projectDir, 'gitignore'),
-      path.join(projectDir, '.gitignore')
-    );
 
     Output.success('Successfully copied files!');
   } catch (e) {
@@ -51,42 +40,6 @@ export const copyToProject = async (projectName: string, dockerConfig = 'mariadb
     process.exit(1);
   }
 };
-
-export const copyRemoteTemplate = async (projectName: string, template: string) => {
-  try {
-    const projectDir = path.join(process.cwd(), projectName);
-
-    const templateName = `superfast-starter-${template}`;
-    const gitFolderName = `${templateName}-main`;
-
-    const folderAlreadyExists = await fs.pathExists(projectDir);
-
-    if (folderAlreadyExists) {
-      Output.error(`Project ${chalk.magentaBright(projectName)} already exists. Exiting.`);
-      process.exit(1);
-    }
-
-    Output.info(`Attempting to resolve remote template ${chalk.magentaBright(template)}...`);
-
-    const {data: zipData} = await axios.get<Buffer>(
-      `https://github.com/superfastcms/${templateName}/archive/refs/heads/main.zip`,
-      {responseType: 'arraybuffer'}
-    );
-
-    const zip = new AdmZip(zipData);
-    zip.extractAllTo('.');
-
-    Output.info(`Copying files to ${chalk.magentaBright(projectName)} directory...`);
-
-    await fs.move(gitFolderName, projectDir);
-
-    Output.success('Successfully copied template!');
-  } catch (e) {
-    console.log(e);
-    Output.error(e.message);
-    process.exit(1);
-  }
-}
 
 export const installProject = async (projectName: string) => {
   try {

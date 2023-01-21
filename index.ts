@@ -1,9 +1,7 @@
-#! /usr/bin/env node
-
 import { Argument, Command, Option } from 'commander';
 import packageJson from './package.json';
 import chalk from 'chalk';
-import { copyRemoteTemplate, copyToProject, installProject } from './helpers/utils';
+import { copyToProject, installProject } from './helpers/utils';
 import Output from "./helpers/output";
 
 const program = new Command();
@@ -34,15 +32,8 @@ program.parse(process.argv);
 
 (async () => {
   const projectDirectory = program.processedArgs[0];
-  const dockerConfig = program.opts<any>().docker;
-  const template = program.opts<any>().template;
 
-  if (template) {
-    await copyRemoteTemplate(projectDirectory, template);
-  } else {
-    await copyToProject(projectDirectory, dockerConfig)
-  }
-
+  await copyToProject(projectDirectory)
   await installProject(projectDirectory);
   Output.nextSteps(projectDirectory);
 })();
