@@ -1,8 +1,8 @@
 {
   "include": [
-	"index.ts",
-	"helpers/**/*"
-  ],
+		"index.ts",
+		"helpers/**/*"
+	],
   "compilerOptions": {
 	"target": "es5",
 	"module": "commonjs",
