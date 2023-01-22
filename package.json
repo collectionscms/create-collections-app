@@ -1,15 +1,16 @@
 {
   "name": "create-superfast-app",
-  "version": "0.1.12",
+  "version": "0.1.16",
   "description": "Create Superfast apps in one command",
   "main": "index.js",
   "bin": {
     "create-superfast-app": "./index.js"
   },
   "scripts": {
-    "dev": "ts-node -T index.ts",
-    "compile": "rimraf dist && tsc && yarn postcompile",
-    "postcompile": "ncp README.md dist/README.md && ncp LICENSE dist/LICENSE && ncp templates dist/templates",
+    "dev": "ts-node index.ts",
+    "copyfiles": "ncp package.json dist/package.json && ncp README.md dist/README.md && ncp LICENSE dist/LICENSE",
+    "compile": "yarn clean && tsc && yarn copyfiles",
+    "clean": "rimraf dist",
     "test": "rimraf create-superfast-app && npm run dev"
   },
   "author": {
@@ -28,7 +29,7 @@
       "url": "https://rocketa.co.jp"
     }
   ],
-  "license": "SEE LICENSE IN LICENSE",
+  "license": "MIT",
   "keywords": [
     "superfast",
     "create-superfast-app",
