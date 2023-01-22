@@ -1,6 +1,7 @@
 import chalk from 'chalk';
 import { Argument, Command } from 'commander';
 import execa from 'execa';
+import ora from 'ora';
 import fse from 'fs-extra';
 import path from 'path';
 import Output from './helpers/output';
@@ -38,9 +39,9 @@ program.parse(process.argv);
 			Output.error(`Destination ${chalk.magentaBright(directory)} already exists and is not an empty directory.`)
 			process.exit(1);
 		}
+	} else {
+		await fse.mkdir(rootPath);
 	}
-
-	Output.info(`Copying files to ${chalk.magentaBright(directory)} directory...`)
 
 	const onError = ({ err, exit = true }) => {
 		if (err) {
@@ -51,11 +52,16 @@ program.parse(process.argv);
 		}
 	};
 
+	const spinner = ora()
+	spinner.start(`Copying files to ${chalk.magentaBright(directory)} directory...`)
+
 	try {
-		await execa('npx', ['superfastcms', 'init', directory]);
+		await execa('npx', ['superfastcms', 'init', `-p ${directory}`]);
 	} catch (err) {
 		onError({err});
 	}
+
+	spinner.stop()
 
 	Output.info('Installing dependencies...')
 
