@@ -1,10 +1,8 @@
 import chalk from 'chalk';
-import logSymbols from 'log-symbols';
 
 const Output = {
-  success: (...output: any[]) => console.log(`${logSymbols['success']} `, ...output),
-  error: (...output: any[]) => console.log(`${logSymbols['error']} `, ...output),
-  info: (...output: any[]) => console.log(chalk.blue(...output)),
+  success: (...output: any[]) => console.log(`✅ `, ...output),
+  error: (...output: any[]) => console.log(`❌ `, ...output),  info: (...output: any[]) => console.log(chalk.blue(...output)),
   nextSteps: (projectName: string) => {
     console.log(`
 ${chalk.green('Awesome!')} You're now ready to start coding.
