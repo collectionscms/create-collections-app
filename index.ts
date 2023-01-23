@@ -63,7 +63,7 @@ program.parse(process.argv);
 	Output.info('✨ Installing dependencies')
 
 	try {
-		await execa('npm', ['install'], {cwd: directory});
+		await execa('npm', ['install'], {cwd: directory, stdio: 'inherit'});
 	} catch (err) {
 		onError({err});
 	}
