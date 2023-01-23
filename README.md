@@ -17,4 +17,3 @@ We are grateful to the authors of existing related projects for their ideas as i
 
 - [Create React App](https://github.com/facebookincubator/create-react-app)
 - [Next.js](https://github.com/zeit/next.js)
-- [Create Burdy App](https://github.com/burdy-io/create-burdy-app)
