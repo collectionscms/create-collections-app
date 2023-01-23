@@ -2,7 +2,6 @@
 import chalk from 'chalk';
 import { Argument, Command } from 'commander';
 import execa from 'execa';
-import ora from 'ora';
 import fse from 'fs-extra';
 import path from 'path';
 import Output from './helpers/output';
@@ -53,26 +52,22 @@ program.parse(process.argv);
 		}
 	};
 
-	const spinner = ora()
-	spinner.start(`Copying files to ${chalk.magentaBright(directory)} directory...`)
+	Output.info('✨ Installing Superfast')
 
 	try {
-		await execa('npx', ['superfastcms', 'init', `-p ${directory}`]);
+		await execa('npx', ['-y', 'superfastcms', 'init', `-p ${directory}`], {stdio: 'inherit'});
+	} catch (err) {
+		onError({err});
+	}
+	
+	Output.info('✨ Installing dependencies')
+
+	try {
+		await execa('npm', ['install'], {cwd: directory});
 	} catch (err) {
 		onError({err});
 	}
 
-	spinner.stop()
-
-	Output.info('Installing dependencies...')
-
-	try {
-		await execa('npm', ['install'], {cwd: directory, stdio: 'inherit'});
-	} catch (err) {
-		onError({err});
-	}
-
-	Output.success(`Successfully installed dependencies for ${chalk.magentaBright(directory)}.`)
-	Output.nextSteps(directory)
+	Output.nextSteps(directory);
 })();
 
