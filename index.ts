@@ -43,29 +43,13 @@ program.parse(process.argv);
 		await fse.mkdir(rootPath);
 	}
 
-	const onError = ({ err, exit = true }) => {
-		if (err) {
-			Output.error(err.stderr || err.stdout || 'Unknown error')
-		}
-		if (exit) {
-			process.exit(1);
-		}
-	};
-
 	Output.info('✨ Installing Superfast')
 
 	try {
 		await execa('npx', ['-y', 'superfastcms', 'init', `-p ${directory}`], {stdio: 'inherit'});
 	} catch (err) {
-		onError({err});
-	}
-	
-	Output.info('✨ Installing dependencies')
-
-	try {
-		await execa('npm', ['install'], {cwd: directory, stdio: 'inherit'});
-	} catch (err) {
-		onError({err});
+		Output.error(err.message || 'Unknown error')
+		process.exit(1);
 	}
 
 	Output.nextSteps(directory);
