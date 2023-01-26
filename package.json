@@ -1,6 +1,6 @@
 {
   "name": "create-superfast-app",
-  "version": "0.1.16",
+  "version": "0.1.17",
   "description": "Create Superfast apps in one command",
   "main": "index.js",
   "bin": {
@@ -8,7 +8,7 @@
   },
   "scripts": {
     "dev": "ts-node index.ts",
-    "copyfiles": "ncp package.json dist/package.json && ncp README.md dist/README.md && ncp LICENSE dist/LICENSE",
+    "copyfiles": "ts-node -T misc/copyStaticFiles.ts",
     "compile": "yarn clean && tsc && yarn copyfiles",
     "clean": "rimraf dist",
     "test": "rimraf create-superfast-app && npm run dev"
