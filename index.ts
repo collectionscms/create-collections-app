@@ -43,7 +43,7 @@ program.parse(process.argv);
 		await fse.mkdir(rootPath);
 	}
 
-	Output.info('✨ Installing Superfast')
+	Output.info('Installing Superfast')
 
 	try {
 		await execa('npx', ['-y', 'superfastcms', 'init', `-p ${directory}`], {stdio: 'inherit'});
