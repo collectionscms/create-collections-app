@@ -4,12 +4,11 @@ import { Argument, Command } from 'commander';
 import execa from 'execa';
 import fse from 'fs-extra';
 import path from 'path';
-import Output from './helpers/output';
-import packageJson from './package.json';
+import Output from './helpers/output.js';
 
 const program = new Command();
 
-program.version(packageJson.version, '-v, --version')
+program.version('0.2.0', '-v, --version')
 program.usage(
   `${chalk.blue('project-directory')} [options]`
 );
