@@ -1,15 +1,11 @@
 {
-  "include": [
-		"index.ts",
-		"helpers/**/*"
-	],
   "compilerOptions": {
-	"target": "es5",
-	"module": "commonjs",
-	"moduleResolution": "node",
+	"target": "ES2022",
+	"module": "node16",
+	"moduleResolution": "node16",
 	"rootDir": ".",
 	"outDir": "./dist",
-	"resolveJsonModule": true,
+	"resolveJsonModule": false,
 	"esModuleInterop": true,
 	"forceConsistentCasingInFileNames": true,
 	"strict": false,
@@ -17,5 +13,14 @@
 	"strictNullChecks": false,
 	"strictFunctionTypes": false,
 	"skipLibCheck": true
-  }
+  },
+	"include": [
+		"index.ts",
+		"helpers/**/*"
+	],
+	"ts-node": {
+		"transpileOnly": true,
+		"files": true,
+		"experimentalResolver": true
+	},
 }

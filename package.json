@@ -2,13 +2,17 @@
   "name": "create-superfast-app",
   "version": "0.1.18",
   "description": "Create Superfast apps in one command",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "bin": {
     "create-superfast-app": "./index.js"
   },
   "scripts": {
-    "dev": "ts-node index.ts",
-    "copyfiles": "ts-node -T misc/copyStaticFiles.ts",
+    "dev": "ts-node --esm index.ts",
+    "copyfiles": "ts-node --esm -T misc/copyStaticFiles.ts",
     "compile": "yarn clean && tsc && yarn copyfiles",
     "clean": "rimraf dist",
     "test": "rimraf create-superfast-app && npm run dev"
