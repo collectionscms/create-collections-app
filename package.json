@@ -1,14 +1,18 @@
 {
   "name": "create-superfast-app",
-  "version": "0.1.18",
+  "version": "0.2.0",
   "description": "Create Superfast apps in one command",
-  "main": "index.js",
+  "type": "module",
+  "exports": "./index.js",
+  "engines": {
+    "node": ">=16.0.0"
+  },
   "bin": {
     "create-superfast-app": "./index.js"
   },
   "scripts": {
-    "dev": "ts-node index.ts",
-    "copyfiles": "ts-node -T misc/copyStaticFiles.ts",
+    "dev": "ts-node --esm index.ts",
+    "copyfiles": "ts-node --esm -T misc/copyStaticFiles.ts",
     "compile": "yarn clean && tsc && yarn copyfiles",
     "clean": "rimraf dist",
     "test": "rimraf create-superfast-app && npm run dev"
@@ -42,9 +46,9 @@
     "react"
   ],
   "dependencies": {
-    "chalk": "^4.1.2",
-    "commander": "^8.1.0",
-    "execa": "^5.1.1",
+    "chalk": "^5.2.0",
+    "commander": "^10.0.0",
+    "execa": "^7.1.1",
     "fs-extra": "^11.1.0"
   },
   "devDependencies": {
