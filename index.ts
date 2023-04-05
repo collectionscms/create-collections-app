@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 import chalk from 'chalk';
 import { Argument, Command } from 'commander';
-import execa from 'execa';
+import {execa} from 'execa';
 import fse from 'fs-extra';
 import path from 'path';
 import Output from './helpers/output.js';
