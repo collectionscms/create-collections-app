@@ -45,7 +45,7 @@ program.parse(process.argv);
 	Output.info('Installing Superfast')
 
 	try {
-		await execa('npx', ['-y', 'superfastcms', 'init', `-p ${directory}`], {stdio: 'inherit'});
+		await execa('npx', ['--silent', '-y', 'superfastcms', 'init', `-p ${directory}`], {stdio: 'inherit'});
 	} catch (err) {
 		Output.error(err.message || 'Unknown error')
 		process.exit(1);
