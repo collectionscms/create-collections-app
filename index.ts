@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+import boxen from 'boxen';
 import chalk from 'chalk';
 import { Argument, Command } from 'commander';
-import {execa} from 'execa';
+import { execa } from 'execa';
 import fse from 'fs-extra';
 import path from 'path';
-import Output from './helpers/output.js';
+import { Output } from './helpers/output.js';
 
 const program = new Command();
 
@@ -51,6 +52,11 @@ program.parse(process.argv);
 		process.exit(1);
 	}
 
-	Output.nextSteps(directory);
+	console.log(
+		boxen(Output.nextSteps(directory), {
+			padding: 1,
+			borderColor: 'green',
+			margin: 1,
+		})
+	);
 })();
-

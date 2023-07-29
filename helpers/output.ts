@@ -1,20 +1,20 @@
 import chalk from 'chalk';
 
-const Output = {
+export const Output = {
   info: (...output: any[]) => console.log(`✨ `, ...output),
-  success: (...output: any[]) => console.log(`⭐️ `, ...output),
-  error: (...output: any[]) => console.log(`❌ `, ...output),
+  success: (...output: any[]) => console.log(`⭐️ `, chalk.green(...output)),
+  error: (...output: any[]) => console.log(`❌ `, chalk.red(...output)),
   nextSteps: (projectName: string) => {
-    console.log(`✅ You're now ready to start, so your next steps are:
+    console.log(`✅ You're now ready to start, so your next steps are`);
 
-$ ${chalk.magentaBright(`cd ${projectName}`)}
+    let message = chalk.green('NextSteps')
+    message += `\n\ncd ${projectName}`
+    message += `\n\n${chalk.grey('To run in development')}`
+    message += `\n\n${'npm run dev'}`
+    message += `\n\n${chalk.grey('To run in production')}`
+    message += `\n\n${'npm run build'}`
+    message += `\n${'npm run start'}`
 
-$ ${chalk.magentaBright('npm run dev')}   - To start a local server for development.
-$ ${chalk.magentaBright('npm run build')} - To build a version for production.
-$ ${chalk.magentaBright('npm run start')} - To run the server in production.
-
-`);
+    return message
   }
 };
-
-export default Output;
