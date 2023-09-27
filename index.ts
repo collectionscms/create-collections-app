@@ -9,14 +9,14 @@ import { Output } from "./helpers/output.js";
 
 const program = new Command();
 
-program.version("0.2.0", "-v, --version");
+program.version("1.0.0", "-v, --version");
 program.usage(`${chalk.blue("project-directory")} [options]`);
 
 // Arguments
 program.addArgument(
-  new Argument("<project-directory>", "specify path for create-superfast-app")
+  new Argument("<project-directory>", "specify path for collections")
     .argOptional()
-    .default("create-superfast-app")
+    .default("collections")
 );
 
 program.parse(process.argv);
@@ -51,12 +51,18 @@ program.parse(process.argv);
     await fse.mkdir(rootPath);
   }
 
-  Output.info("Installing Superfast");
+  Output.info("Installing Collections");
 
   try {
     await execa(
       "npx",
-      ["--silent", "-y", "superfastcms", "init", `-p ${directory}`],
+      [
+        "--silent",
+        "-y",
+        "@collectionscms/collections",
+        "init",
+        `-p ${directory}`,
+      ],
       { stdio: "inherit" }
     );
   } catch (err) {
