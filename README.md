@@ -1,9 +1,9 @@
-# Create Superfast App
+# Create Collections App
 
 ```sh
-npm install -g create-superfast-app
+npm install -g create-collections-app
 
-create-superfast-app my-app
+create-collections-app my-app
 cd my-app/
 npm run dev
 ```
