@@ -1,6 +1,6 @@
 {
   "name": "create-collections-app",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0",
   "description": "Create Collections apps in one command",
   "type": "module",
   "exports": "./index.js",
